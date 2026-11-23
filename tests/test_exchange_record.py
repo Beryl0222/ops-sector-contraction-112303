@@ -15,3 +15,4 @@ class ExchangeRecordTests(unittest.TestCase):
         self.assertTrue(set(record["query"]["open_axes"]) == {"i","o"})
         self.assertTrue(all(np.shape(data) == tuple(record["axes"][axis][int(bit)] for axis, bit in zip(record["owner_axes"]["B"], sector)) for sector, data in record["blocks"]["B"].items() if data is not None))
         self.assertTrue(all(tuple(len(ix) for ix in indices) == tuple(record["axes"][axis][int(bit)] for axis, bit in zip(record["nodes"][2]["axes"], sector)) and all(0 <= i < np.shape(record["blocks"]["S"][sector[::-1]])[axis] for position, axis in enumerate(record["nodes"][2]["axis_permutation"]) for i in indices[position]) for sector, indices in record["nodes"][2]["indices"].items()))
+        self.assertTrue(len(set(record["nodes"][2]["indices"]["00"][0])) < len(record["nodes"][2]["indices"]["00"][0]))
