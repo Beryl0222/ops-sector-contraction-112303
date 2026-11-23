@@ -13,3 +13,4 @@ class ExchangeRecordTests(unittest.TestCase):
         self.assertTrue(record["blocks"]["B"]["111"] is None and record["blocks"]["D"]["0"] == "zero")
         self.assertTrue(np.shape(record["replacements"][0]["values"]) == tuple(record["replacements"][0]["shape"]))
         self.assertTrue(set(record["query"]["open_axes"]) == {"i","o"})
+        self.assertTrue(all(np.shape(data) == tuple(record["axes"][axis][int(bit)] for axis, bit in zip(["j","k","l"], sector)) for sector, data in record["blocks"]["B"].items() if data is not None))
